@@ -1,0 +1,17 @@
+version: "3.1"
+rules:
+  - rule: Ask for city if not provided
+    condition:
+      - slot_was_set:
+          - city: null
+    steps:
+      - intent: ask_weather
+      - action: utter_ask_city
+
+  - rule: Provide weather when city is known
+    condition:
+      - slot_was_set:
+          - city: not null
+    steps:
+      - intent: ask_weather
+      - action: action_get_weather
